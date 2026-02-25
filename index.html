@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="hellokitty">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lora's Daily Learning Tracker - Track study progress with fun themes">
+    <title>🌈 Lora's Learning Tracker ✨</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍔</text></svg>">
+</head>
+
+<body>
+
+    <!-- Theme Switcher (Large and child-friendly) -->
+    <div class="theme-switcher-container">
+        <button class="theme-btn-main" id="themeBtnMain" title="Change Theme">
+            <span id="currentThemeIcon">🐱</span>
+        </button>
+        <div class="theme-menu" id="themeMenu">
+            <button class="theme-option" data-theme="demonhunter" title="Demon Hunter">⚔️</button>
+            <button class="theme-option" data-theme="spiderman" title="Spider Man">🕷️</button>
+            <button class="theme-option" data-theme="labubu" title="Labubu">🐰</button>
+            <button class="theme-option" data-theme="kuromi" title="Kuromi">💀</button>
+            <button class="theme-option" data-theme="hellokitty" title="Hello Kitty">🐱</button>
+        </div>
+    </div>
+
+    <!-- Floating decorations (Changed by JS) -->
+    <div id="floatingDecos"></div>
+
+    <div class="container" id="mainApp">
+        <!-- Export button -->
+        <button class="export-btn" id="exportBtn" title="Export CSV">
+            <span class="export-icon">📊</span>
+        </button>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="theme-banner" id="themeBanner">🌈 ✨ 🌈 ✨ 🌈</div>
+            <h1 class="header-title">Lora's Tracker</h1>
+            <p class="header-subtitle">✨ Every step counts! ✨</p>
+
+            <!-- Total Score -->
+            <div class="score-card">
+                <span class="score-label">Total<br>Score</span>
+                <span class="score-value" id="totalScore">0</span>
+            </div>
+
+            <!-- Goal Progress -->
+            <div class="goal-section">
+                <span class="goal-label">🍔 Burger Quest: <span id="burgerCount">0</span>/50</span>
+                <div class="goal-bar-bg">
+                    <div class="goal-bar-fill" id="goalFill" style="width: 0%"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Week Navigation -->
+        <nav class="week-nav">
+            <button id="prevWeek" class="nav-btn">◀</button>
+            <span class="week-label" id="weekLabel">Loading...</span>
+            <button id="nextWeek" class="nav-btn">▶</button>
+        </nav>
+
+        <!-- Tracker Table -->
+        <div class="tracker-card">
+            <table class="tracker-table">
+                <thead>
+                    <tr id="headerRow">
+                        <th class="item-header">📋 Items</th>
+                        <th class="day-header"><span class="day-name">Sun</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Mon</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Tue</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Wed</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Thu</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Fri</span><span class="day-date"></span></th>
+                        <th class="day-header"><span class="day-name">Sat</span><span class="day-date"></span></th>
+                    </tr>
+                </thead>
+                <tbody id="trackerBody">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Confirm Button -->
+        <div class="confirm-section">
+            <button class="confirm-btn" id="confirmBtn">
+                <span class="confirm-btn-icon">✅</span>
+                <span class="confirm-btn-text">Confirm & Save</span>
+            </button>
+            <p class="confirm-hint" id="confirmHint">Check items, then press save! 🍔</p>
+        </div>
+
+        <div class="footer">Made with ❤️ for Lora</div>
+    </div>
+
+    <!-- Burger Animation Modal (Approx 10s) -->
+    <div class="burger-modal-overlay" id="burgerModal">
+        <div class="burger-modal">
+            <div class="burger-assembly" id="burgerAssembly">
+                <!-- Burger parts will be animated in via JS -->
+            </div>
+            <div class="celebration-text" id="celebrationText">
+                <h2 id="burgerTitle">🍔 YUMMY! 🍔</h2>
+                <p id="burgerMsg">Lora finished her tasks!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
