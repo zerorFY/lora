@@ -6,14 +6,28 @@ const ITEMS = [
 ];
 
 const THEMES = {
-    hellokitty: { icon: '🐱', banner: '💖 🎀 🐱 🎀 💖', deco: ['🐱', '💖', '🎀', '🎈', '✨'], burger: '🍔' },
-    demonhunter: { icon: '⚔️', banner: '🗡️ 🛡️ 🏹 🛡️ 🗡️', deco: ['⚔️', '🏹', '🛡️', '💀', '🔥'], burger: '🍱' },
-    spiderman: { icon: '🕷️', banner: '🕸️ 🕸️ 🕷️ 🕸️ 🕸️', deco: ['🕷️', '🕸️', '🏙️', '🦸', '💥'], burger: '🍕' },
-    labubu: { icon: '🐰', banner: '🧸 🐰 🧚 🐰 🧸', deco: ['🐰', '🦷', '🧚', '🌲', '🍄'], burger: '🍦' },
-    kuromi: { icon: '💀', banner: '🖤 💀 😈 💀 🖤', deco: ['😈', '🖤', '💀', '⚡', '💣'], burger: '🍮' }
+    hellokitty: { icon: '🐱', banner: '💖 🎀 🐱 🎀 💖', deco: ['🐱', '💖', '🎀', '🎈', '🍼'] },
+    demonhunter: { icon: '⚔️', banner: '🗡️ 🛡️ 🏹 🛡️ 🗡️', deco: ['⚔️', '🏹', '🛡️', '💀', '🔥'] },
+    spiderman: { icon: '🕷️', banner: '🕸️ 🕸️ 🕷️ 🕸️ 🕸️', deco: ['🕷️', '🕸️', '🏙️', '🦸', '💥'] },
+    labubu: { icon: '🐰', banner: '🧸 🐰 🧚 🐰 🧸', deco: ['🐰', '🦷', '🧚', '🌲', '🍄'] },
+    kuromi: { icon: '💀', banner: '🖤 💀 😈 💀 🖤', deco: ['😈', '🖤', '💀', '⚡', '💣'] }
 };
 
-const START_DATE = new Date(2026, 1, 23); // Monday, Feb 23, 2026
+const BURGER_PARTS = [
+    { char: '🍞', y: 350, delay: 0 },    // Bottom Bun
+    { char: '🥣', y: 320, delay: 0.8 },  // Sauce (Mayo/Ketchup)
+    { char: '🥩', y: 290, delay: 1.6 },  // Meat Patty
+    { char: '🧀', y: 260, delay: 2.4 },  // Cheese Slice
+    { char: '🥓', y: 240, delay: 3.2 },  // Bacon / Extra Meat
+    { char: '🥗', y: 210, delay: 4.0 },  // Lettuce
+    { char: '🧅', y: 195, delay: 4.8 },  // Onion
+    { char: '🍅', y: 170, delay: 5.6 },  // Tomato
+    { char: '🥒', y: 150, delay: 6.4 },  // Cucumber / Pickle
+    { char: '🥣', y: 130, delay: 7.2 },  // More Sauce
+    { char: '🍞', y: 80, delay: 8.5 }    // Top Bun
+];
+
+const START_DATE = new Date(2026, 1, 23);
 const BURGER_GOAL = 50;
 
 let currentTheme = 'hellokitty';
@@ -33,18 +47,19 @@ function setTheme(themeId) {
     // Update floating decos
     const decoContainer = document.getElementById('floatingDecos');
     decoContainer.innerHTML = '';
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 12; i++) {
         const d = document.createElement('div');
         d.className = 'floating-deco';
         d.textContent = theme.deco[i % theme.deco.length];
-        d.style.left = (Math.random() * 90) + '%';
-        d.style.top = (Math.random() * 90) + '%';
-        d.style.animationDelay = (Math.random() * 5) + 's';
+        d.style.left = (Math.random() * 95) + '%';
+        d.style.top = (Math.random() * 95) + '%';
+        d.style.animationDelay = (Math.random() * 10) + 's';
+        d.style.fontSize = (40 + Math.random() * 40) + 'px';
         decoContainer.appendChild(d);
     }
 }
 
-// ===== Core Logic (Simplified from Freya for Lora) =====
+// ===== Data Logic =====
 function getWeekKey(offset) {
     const d = new Date(START_DATE);
     d.setDate(d.getDate() + offset * 7);
@@ -68,91 +83,85 @@ function saveWeekData(offset, data) {
 
 function calcTotalScore() {
     let total = 0;
-    const today = new Date();
-    // Simplified: 1 point per checkbox checked
-    for (let w = 0; w <= 52; w++) {
+    // Walk through stored weeks (limit to 52 for perf)
+    for (let w = -10; w <= 52; w++) {
         const stored = localStorage.getItem(getWeekKey(w));
-        if (!stored) continue;
-        const weekData = JSON.parse(stored);
-        for (let d = 0; d < 7; d++) {
-            Object.values(weekData[d]).forEach(val => { if (val) total++; });
+        if (stored) {
+            const weekData = JSON.parse(stored);
+            for (let d = 0; d < 7; d++) {
+                Object.values(weekData[d]).forEach(val => { if (val) total++; });
+            }
         }
     }
     return total;
 }
 
-// ===== Burger Animation (10s sequence) =====
+// ===== Burger Animation (Real Burger, 10-15 seconds) =====
 function showBurgerAnimation() {
     const overlay = document.getElementById('burgerModal');
     const assembly = document.getElementById('burgerAssembly');
+    const celebText = document.getElementById('celebrationText');
+
     overlay.classList.add('active');
     assembly.innerHTML = '';
+    celebText.style.opacity = '0';
 
-    const parts = [
-        { char: '🍞', y: '230px', delay: 0 },    // Bottom bun
-        { char: '🥩', y: '180px', delay: 1.5 },  // Meat
-        { char: '🧀', y: '160px', delay: 3.0 },  // Cheese
-        { char: '🥗', y: '140px', delay: 4.5 },  // Lettuce
-        { char: '🍅', y: '110px', delay: 6.0 },  // Tomato
-        { char: '🍞', y: '60px', delay: 7.5 },   // Top bun
-        { char: '✨', y: '0px', delay: 9.0 }     // Sparkle
-    ];
-
-    parts.forEach(p => {
+    BURGER_PARTS.forEach(p => {
         const el = document.createElement('div');
         el.className = 'burger-part';
         el.textContent = p.char;
-        el.style.setProperty('--target-y', p.y);
+        el.style.setProperty('--target-y', p.y + 'px');
         assembly.appendChild(el);
 
         setTimeout(() => {
             el.classList.add('landed');
+            // Add a small shake/bounce impact
+            setTimeout(() => el.classList.add('bounce'), 600);
         }, p.delay * 1000);
     });
 
-    // Fire confetti at the end
+    // Fire confetti at the very end
     setTimeout(() => {
         fireConfetti();
-        document.getElementById('celebrationText').style.opacity = '1';
-    }, 9000);
+        celebText.style.opacity = '1';
+    }, (BURGER_PARTS[BURGER_PARTS.length - 1].delay + 1) * 1000);
 
-    // Auto-close
+    // Auto-close after everything
     setTimeout(() => {
         overlay.classList.remove('active');
-        document.getElementById('celebrationText').style.opacity = '0';
-    }, 13000);
+    }, 15000);
 }
 
 function fireConfetti() {
     const container = document.getElementById('confettiContainer');
     container.innerHTML = '';
-    for (let i = 0; i < 50; i++) {
+    const colors = ['#FFD700', '#FF69B4', '#EE82EE', '#87CEEB', '#FF4500'];
+    for (let i = 0; i < 100; i++) {
         const c = document.createElement('div');
         c.className = 'confetti';
         c.style.left = Math.random() * 100 + '%';
-        c.style.backgroundColor = ['#FFD700', '#FF69B4', '#FFF', '#87CEEB'][Math.floor(Math.random() * 4)];
-        c.style.width = '10px';
-        c.style.height = '10px';
+        c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        c.style.width = (8 + Math.random() * 12) + 'px';
+        c.style.height = c.style.width;
         c.style.position = 'fixed';
-        c.style.top = '-10px';
-        c.style.animation = `fall ${2 + Math.random() * 3}s linear forwards`;
+        c.style.top = '-20px';
+        c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        c.style.animation = `fallDown ${2 + Math.random() * 4}s linear forwards`;
         container.appendChild(c);
     }
 }
 
-// Inject tailwind-like keyframe for confetti
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes fall {
-        to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+// Confetti animation
+const styleSheet = document.createElement('style');
+styleSheet.textContent = `
+    @keyframes fallDown {
+        to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
     }
-    .confetti { z-index: 3000; }
 `;
-document.head.appendChild(style);
+document.head.appendChild(styleSheet);
 
 // ===== UI Rendering =====
 function renderTracker() {
-    const weekKey = getWeekKey(currentWeekOffset);
     const weekData = loadWeekData(currentWeekOffset);
 
     const d = new Date(START_DATE);
@@ -200,31 +209,31 @@ function renderTracker() {
         tbody.appendChild(tr);
     });
 
-    // Update Header Score
+    // Update Scores
     const total = calcTotalScore();
     document.getElementById('totalScore').textContent = total;
     document.getElementById('burgerCount').textContent = total;
     document.getElementById('goalFill').style.width = Math.min((total / BURGER_GOAL) * 100, 100) + '%';
 
-    // Headers
-    const headers = document.querySelectorAll('.day-date');
+    // Day Headers
+    const dateHeaders = document.querySelectorAll('.day-date');
     weekDates.forEach((date, i) => {
-        headers[i].textContent = `${date.getMonth() + 1}/${date.getDate()}`;
+        dateHeaders[i].textContent = `${date.getMonth() + 1}/${date.getDate()}`;
     });
 }
 
 function performSave() {
     const weekData = loadWeekData(currentWeekOffset);
-    let changed = false;
+    let hasChanges = false;
     for (const key in pendingChanges) {
         const [day, itemId] = key.split('|');
         if (weekData[day][itemId] !== pendingChanges[key]) {
             weekData[day][itemId] = pendingChanges[key];
-            changed = true;
+            hasChanges = true;
         }
     }
 
-    if (changed) {
+    if (hasChanges) {
         saveWeekData(currentWeekOffset, weekData);
         showBurgerAnimation();
     }
@@ -239,17 +248,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('lora_theme') || 'hellokitty';
     setTheme(savedTheme);
 
-    // Theme Switcher Events
+    // Theme Switcher
     document.querySelectorAll('.theme-option').forEach(btn => {
         btn.onclick = () => setTheme(btn.dataset.theme);
     });
 
-    // Nav Events
+    // Week Nav
     document.getElementById('prevWeek').onclick = () => { currentWeekOffset--; renderTracker(); };
     document.getElementById('nextWeek').onclick = () => { currentWeekOffset++; renderTracker(); };
 
-    // Save Event
+    // Save
     document.getElementById('confirmBtn').onclick = performSave;
 
+    // Initial Render
     renderTracker();
 });

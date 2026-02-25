@@ -1,61 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap');
 
 :root {
-    /* Default Theme: Hello Kitty */
+    /* Theme Transition Duration */
+    --theme-speed: 0.6s;
+}
+
+/* --- THEME: HELLO KITTY (Sweet & Bright) --- */
+[data-theme="hellokitty"] {
     --primary: #FFB7C5;
     --secondary: #FF69B4;
-    --accent: #FF1493;
-    --bg: #FFF0F5;
-    --text: #4A4A4A;
-    --card-bg: rgba(255, 255, 255, 0.9);
-    --header-grad: linear-gradient(135deg, #FFB7C5, #FF69B4);
-    --border-radius: 24px;
-    --font-main: 'Outfit', sans-serif;
-    --deco-color: #FF69B4;
-}
-
-[data-theme="demonhunter"] {
-    --primary: #2C3E50;
-    --secondary: #E74C3C;
-    --accent: #F1C40F;
-    --bg: #1A1A1A;
-    --text: #ECF0F1;
-    --card-bg: rgba(44, 62, 80, 0.9);
-    --header-grad: linear-gradient(135deg, #2C3E50, #E74C3C);
-    --deco-color: #E74C3C;
-}
-
-[data-theme="spiderman"] {
-    --primary: #E61E26;
-    --secondary: #315FB0;
     --accent: #FFFFFF;
-    --bg: #111111;
-    --text: #F8F9FA;
-    --card-bg: rgba(230, 30, 38, 0.15);
-    --header-grad: linear-gradient(135deg, #E61E26, #315FB0);
-    --deco-color: #E61E26;
-}
-
-[data-theme="labubu"] {
-    --primary: #A2D9CE;
-    --secondary: #F7DC6F;
-    --accent: #E67E22;
-    --bg: #FEF9E7;
-    --text: #5D4037;
+    --bg-color: #FFF0F5;
+    --bg-pattern: radial-gradient(#FFB7C5 2px, transparent 2px);
+    --bg-size: 30px 30px;
+    --text: #C71585;
     --card-bg: rgba(255, 255, 255, 0.95);
-    --header-grad: linear-gradient(135deg, #A2D9CE, #F7DC6F);
-    --deco-color: #E67E22;
+    --header-grad: linear-gradient(135deg, #FFB7C5, #FF69B4);
+    --border: 4px solid #FF69B4;
 }
 
+/* --- THEME: KUROMI (Edgy & Dark Purple) --- */
 [data-theme="kuromi"] {
     --primary: #9B59B6;
     --secondary: #2C3E50;
     --accent: #E91E63;
-    --bg: #F5E6FF;
-    --text: #2C3E50;
-    --card-bg: rgba(255, 255, 255, 0.85);
-    --header-grad: linear-gradient(135deg, #9B59B6, #2C3E50);
-    --deco-color: #9B59B6;
+    --bg-color: #1A0B2E;
+    --bg-pattern: repeating-linear-gradient(45deg, #2C3E50 0, #2C3E50 10px, #1A0B2E 10px, #1A0B2E 20px);
+    --bg-size: auto;
+    --text: #E0B0FF;
+    --card-bg: rgba(44, 62, 80, 0.9);
+    --header-grad: linear-gradient(135deg, #9B59B6, #000000);
+    --border: 4px solid #9B59B6;
+}
+
+/* --- THEME: SPIDER MAN (Heroic Red & Blue) --- */
+[data-theme="spiderman"] {
+    --primary: #E61E26;
+    --secondary: #315FB0;
+    --accent: #FFFFFF;
+    --bg-color: #0A0A0A;
+    --bg-pattern: radial-gradient(circle at 50% 50%, transparent 20%, #111 20%, #111 100%), linear-gradient(to right, #333 1px, transparent 1px), linear-gradient(to bottom, #333 1px, transparent 1px);
+    --bg-size: 100px 100px, 20px 20px, 20px 20px;
+    --text: #FFFFFF;
+    --card-bg: rgba(230, 30, 38, 0.2);
+    --header-grad: linear-gradient(135deg, #E61E26, #000);
+    --border: 4px solid #E61E26;
+}
+
+/* --- THEME: DEMON HUNTER (Grim & Lethal) --- */
+[data-theme="demonhunter"] {
+    --primary: #4A0404;
+    --secondary: #FF0000;
+    --accent: #F1C40F;
+    --bg-color: #000000;
+    --bg-pattern: linear-gradient(45deg, #111 25%, transparent 25%), linear-gradient(-45deg, #111 25%, transparent 25%);
+    --bg-size: 60px 60px;
+    --text: #FF6666;
+    --card-bg: rgba(0, 0, 0, 0.85);
+    --header-grad: linear-gradient(135deg, #4A0404, #900);
+    --border: 4px solid #F1C40F;
+}
+
+/* --- THEME: LABUBU (Wild & Forest) --- */
+[data-theme="labubu"] {
+    --primary: #2ECC71;
+    --secondary: #8E44AD;
+    --accent: #F39C12;
+    --bg-color: #F4F9F4;
+    --bg-pattern: radial-gradient(#2ECC71 10%, transparent 10%);
+    --bg-size: 50px 50px;
+    --text: #145A32;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --header-grad: linear-gradient(135deg, #2ECC71, #8E44AD);
+    --border: 4px solid #8E44AD;
 }
 
 * {
@@ -66,16 +83,20 @@
 }
 
 body {
-    font-family: var(--font-main);
-    background-color: var(--bg);
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    background-image: var(--bg-pattern);
+    background-size: var(--bg-size);
     color: var(--text);
     min-height: 100vh;
-    transition: all 0.5s ease;
-    overflow-x: hidden;
+    transition: background-color var(--theme-speed), background-image var(--theme-speed), color var(--theme-speed);
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Theme Switcher */
+/* Theme Switcher - BIG and BOLD */
 .theme-switcher-container {
     position: fixed;
     top: 20px;
@@ -84,34 +105,36 @@ body {
 }
 
 .theme-btn-main {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    border: 4px solid var(--accent);
-    background: var(--card-bg);
-    font-size: 40px;
+    border: 6px solid var(--accent);
+    background: var(--header-grad);
+    font-size: 50px;
     cursor: pointer;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: rotate(-10deg);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .theme-btn-main:hover {
-    transform: scale(1.1);
+    transform: rotate(10deg) scale(1.1);
 }
 
 .theme-menu {
     position: absolute;
-    top: 90px;
+    top: 110px;
     right: 0;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 15px;
     opacity: 0;
     pointer-events: none;
-    transition: all 0.3s ease;
+    transform: translateY(-20px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .theme-switcher-container:hover .theme-menu {
@@ -121,219 +144,265 @@ body {
 }
 
 .theme-option {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
-    border: none;
-    background: var(--card-bg);
-    font-size: 30px;
+    border: 3px solid var(--accent);
+    background: white;
+    font-size: 35px;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s;
 }
 
 .theme-option:hover {
-    transform: scale(1.2);
+    transform: scale(1.3);
 }
 
-/* Layout */
+/* Container */
 .container {
-    max-width: 1000px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 900px;
     background: var(--card-bg);
-    border-radius: var(--border-radius);
-    padding: 30px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-    backdrop-filter: blur(10px);
+    border: var(--border);
+    border-radius: 40px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
     position: relative;
+    border-style: dashed;
 }
 
+/* Header */
 .header {
     text-align: center;
-    margin-bottom: 30px;
-}
-
-.theme-banner {
-    font-size: 24px;
-    margin-bottom: 10px;
-    letter-spacing: 5px;
+    margin-bottom: 40px;
 }
 
 .header-title {
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: 800;
     background: var(--header-grad);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 5px;
+    filter: drop-shadow(2px 2px 0px var(--accent));
+    margin-bottom: 10px;
 }
 
-/* Tables & UI Components (Generic style, same as Freya but with vars) */
+.score-card {
+    background: var(--bg-color);
+    border: 3px solid var(--secondary);
+    padding: 20px 40px;
+    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.score-value {
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--secondary);
+}
+
+/* Tracker Table */
+.tracker-card {
+    overflow-x: auto;
+    margin-bottom: 40px;
+}
+
 .tracker-table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 10px;
+    border-spacing: 0 15px;
 }
 
 .item-name {
-    font-size: 1.4rem;
-    font-weight: 600;
-    padding: 15px;
-    color: var(--text);
+    font-size: 1.8rem;
+    font-weight: 800;
+    padding: 20px;
 }
 
 .checkbox-wrapper {
+    width: 80px;
+    height: 80px;
     display: block;
-    position: relative;
-    width: 60px;
-    height: 60px;
     margin: 0 auto;
 }
 
 .checkbox-wrapper input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+    display: none;
 }
 
 .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: #EEE;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s;
-    border: 3px solid transparent;
-}
-
-.checkbox-wrapper input:checked ~ .checkmark {
-    background-color: var(--secondary);
-    border-color: var(--accent);
-}
-
-.checkbox-wrapper input:checked ~ .checkmark:after {
-    content: "🍔";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 30px;
-}
-
-/* Burger Animation */
-.burger-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
+    display: block;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.9);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-}
-
-.burger-modal-overlay.active {
-    display: flex;
-}
-
-.burger-modal {
-    text-align: center;
-    width: 100%;
-    max-width: 500px;
-}
-
-.burger-assembly {
-    position: relative;
-    height: 350px;
-    margin-bottom: 40px;
-}
-
-.burger-part {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%) translateY(-600px);
-    font-size: 120px;
-    opacity: 0;
-    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.burger-part.landed {
-    transform: translateX(-50%) translateY(var(--target-y));
-    opacity: 1;
-}
-
-/* Week Nav, Score Cards, Buttons etc... */
-.nav-btn, .confirm-btn {
-    padding: 15px 30px;
-    font-size: 1.5rem;
-    border-radius: 50px;
-    border: none;
+    background: #EEE;
+    border-radius: 20px;
+    border: 4px solid transparent;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
+}
+
+input:checked+.checkmark {
     background: var(--secondary);
-    color: white;
-    font-weight: 800;
-    transition: all 0.3s;
+    border-color: var(--accent);
+    transform: scale(1.1) rotate(5deg);
 }
 
+input:checked+.checkmark::after {
+    content: "✔️";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 40px;
+}
+
+/* Confirm Button */
 .confirm-btn {
     width: 100%;
+    height: 100px;
     background: var(--header-grad);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.confirm-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
 
 .confirm-btn:active {
     transform: scale(0.95);
 }
 
+/* Burger Animation Overlay */
+.burger-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 5000;
+}
+
+.burger-modal-overlay.active {
+    display: flex;
+}
+
+.burger-assembly {
+    position: relative;
+    width: 400px;
+    height: 500px;
+}
+
+.burger-part {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-1000px);
+    font-size: 150px;
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+}
+
+.burger-part.landed {
+    opacity: 1;
+    transform: translateX(-50%) translateY(var(--target-y));
+}
+
+.burger-part.landed.bounce {
+    animation: bounceLand 0.4s;
+}
+
+@keyframes bounceLand {
+    0% {
+        transform: translateX(-50%) translateY(var(--target-y)) scaleY(1.2);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(calc(var(--target-y) - 20px)) scaleY(0.8);
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(var(--target-y)) scaleX(1);
+    }
+}
+
+#celebrationText {
+    margin-top: 50px;
+    color: white;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+#celebrationText h2 {
+    font-size: 4rem;
+    margin-bottom: 10px;
+}
+
+#celebrationText p {
+    font-size: 2rem;
+}
+
 /* Floating Decos */
 .floating-deco {
     position: fixed;
-    font-size: 40px;
-    opacity: 0.15;
-    pointer-events: none;
+    font-size: 60px;
+    opacity: 0.2;
     z-index: -1;
-    animation: float 10s infinite ease-in-out;
+    animation: floatAround 12s infinite ease-in-out;
 }
 
-@keyframes float {
-    0%, 100% { transform: translate(0, 0) rotate(0deg); }
-    50% { transform: translate(20px, 30px) rotate(15deg); }
+@keyframes floatAround {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1) rotate(0);
+    }
+
+    33% {
+        transform: translate(50px, -50px) scale(1.2) rotate(10deg);
+    }
+
+    66% {
+        transform: translate(-30px, 40px) scale(0.8) rotate(-10deg);
+    }
 }
 
-/* Score displays */
-.score-card {
-    background: white;
-    padding: 15px;
-    border-radius: 20px;
-    display: inline-flex;
-    align-items: center;
-    gap: 15px;
-    margin-top: 15px;
-}
+@media (max-width: 600px) {
+    .header-title {
+        font-size: 2.5rem;
+    }
 
-.score-value {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--accent);
-}
+    .item-name {
+        font-size: 1.2rem;
+    }
 
-.goal-bar-bg {
-    width: 100%;
-    height: 15px;
-    background: #EEE;
-    border-radius: 10px;
-    margin-top: 10px;
-    overflow: hidden;
-}
+    .checkbox-wrapper {
+        width: 50px;
+        height: 50px;
+    }
 
-.goal-bar-fill {
-    height: 100%;
-    background: var(--header-grad);
-    width: 0%;
-    transition: width 0.5s;
+    .confirm-btn {
+        font-size: 1.5rem;
+        height: 70px;
+    }
 }
