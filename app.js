@@ -6,26 +6,12 @@ const ITEMS = [
 ];
 
 const THEMES = {
-    hellokitty: { icon: '🐱', banner: '💖 🎀 🐱 🎀 💖', deco: ['🐱', '💖', '🎀', '🎈', '🍼'] },
-    demonhunter: { icon: '⚔️', banner: '🗡️ 🛡️ 🏹 🛡️ 🗡️', deco: ['⚔️', '🏹', '🛡️', '💀', '🔥'] },
-    spiderman: { icon: '🕷️', banner: '🕸️ 🕸️ 🕷️ 🕸️ 🕸️', deco: ['🕷️', '🕸️', '🏙️', '🦸', '💥'] },
-    labubu: { icon: '🐰', banner: '🧸 🐰 🧚 🐰 🧸', deco: ['🐰', '🦷', '🧚', '🌲', '🍄'] },
-    kuromi: { icon: '💀', banner: '🖤 💀 😈 💀 🖤', deco: ['😈', '🖤', '💀', '⚡', '💣'] }
+    hellokitty: { icon: '🐱', banner: '💖 🎀 🐱 🎀 💖', deco: ['🐱', '💖', '🎀', '🎈', '🍼'], snacks: ['🍭', '🍬', '🍦', '🍰', '🍓', '🧁'] },
+    demonhunter: { icon: '⚔️', banner: '🗡️ 🛡️ 🏹 🛡️ 🗡️', deco: ['⚔️', '🏹', '🛡️', '💀', '🔥'], snacks: ['🍖', '🍗', '🍜', '🍱', '🥘', '🥟'] },
+    spiderman: { icon: '🕷️', banner: '🕸️ 🕸️ 🕷️ 🕸️ 🕸️', deco: ['🕷️', '🕸️', '🏙️', '🦸', '💥'], snacks: ['🍕', '🍔', '🌭', '🍟', '🥤', '🥨'] },
+    labubu: { icon: '🐰', banner: '🧸 🐰 🧚 🐰 🧸', deco: ['🐰', '🦷', '🧚', '🌲', '🍄'], snacks: ['🍉', '🍇', '🍒', '🥭', '🍍', '🥥'] },
+    kuromi: { icon: '💀', banner: '🖤 💀 😈 💀 🖤', deco: ['😈', '🖤', '💀', '⚡', '💣'], snacks: ['🍩', '🍪', '🍫', '🍮', '🍨', '🍯'] }
 };
-
-const BURGER_PARTS = [
-    { char: '🍞', y: 350, delay: 0 },    // Bottom Bun
-    { char: '🥣', y: 320, delay: 0.8 },  // Sauce (Mayo/Ketchup)
-    { char: '🥩', y: 290, delay: 1.6 },  // Meat Patty
-    { char: '🧀', y: 260, delay: 2.4 },  // Cheese Slice
-    { char: '🥓', y: 240, delay: 3.2 },  // Bacon / Extra Meat
-    { char: '🥗', y: 210, delay: 4.0 },  // Lettuce
-    { char: '🧅', y: 195, delay: 4.8 },  // Onion
-    { char: '🍅', y: 170, delay: 5.6 },  // Tomato
-    { char: '🥒', y: 150, delay: 6.4 },  // Cucumber / Pickle
-    { char: '🥣', y: 130, delay: 7.2 },  // More Sauce
-    { char: '🍞', y: 80, delay: 8.5 }    // Top Bun
-];
 
 const START_DATE = new Date(2026, 1, 23);
 const BURGER_GOAL = 50;
@@ -40,21 +26,25 @@ function setTheme(themeId) {
     currentTheme = themeId;
     localStorage.setItem('lora_theme', themeId);
 
+    // Update sidebar active buttons
+    document.querySelectorAll('.theme-option').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.theme === themeId);
+    });
+
     const theme = THEMES[themeId];
-    document.getElementById('currentThemeIcon').textContent = theme.icon;
     document.getElementById('themeBanner').textContent = theme.banner;
 
     // Update floating decos
     const decoContainer = document.getElementById('floatingDecos');
     decoContainer.innerHTML = '';
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 15; i++) {
         const d = document.createElement('div');
         d.className = 'floating-deco';
         d.textContent = theme.deco[i % theme.deco.length];
         d.style.left = (Math.random() * 95) + '%';
         d.style.top = (Math.random() * 95) + '%';
-        d.style.animationDelay = (Math.random() * 10) + 's';
-        d.style.fontSize = (40 + Math.random() * 40) + 'px';
+        d.style.animationDelay = (Math.random() * 8) + 's';
+        d.style.fontSize = (50 + Math.random() * 60) + 'px';
         decoContainer.appendChild(d);
     }
 }
@@ -96,40 +86,50 @@ function calcTotalScore() {
     return total;
 }
 
-// ===== Burger Animation (Real Burger, 10-15 seconds) =====
-function showBurgerAnimation() {
-    const overlay = document.getElementById('burgerModal');
-    const assembly = document.getElementById('burgerAssembly');
-    const celebText = document.getElementById('celebrationText');
+// ===== Snack Rain Animation (10s Chaos!) =====
+function showSnackRain() {
+    const overlay = document.getElementById('snackRainOverlay');
+    const container = document.getElementById('rainContainer');
+    const card = document.getElementById('celebCard');
 
     overlay.classList.add('active');
-    assembly.innerHTML = '';
-    celebText.style.opacity = '0';
+    setTimeout(() => card.classList.add('active'), 500);
 
-    BURGER_PARTS.forEach(p => {
-        const el = document.createElement('div');
-        el.className = 'burger-part';
-        el.textContent = p.char;
-        el.style.setProperty('--target-y', p.y + 'px');
-        assembly.appendChild(el);
+    const snacks = THEMES[currentTheme].snacks;
+    const duration = 8000; // 8 seconds of rain
+    const start = Date.now();
 
+    const rainTimer = setInterval(() => {
+        if (Date.now() - start > duration) {
+            clearInterval(rainTimer);
+            return;
+        }
+        createFallingSnack(container, snacks);
+    }, 120);
+
+    // Confetti at the peak
+    setTimeout(() => fireConfetti(), duration - 2000);
+
+    // Close
+    setTimeout(() => {
+        card.classList.remove('active');
         setTimeout(() => {
-            el.classList.add('landed');
-            // Add a small shake/bounce impact
-            setTimeout(() => el.classList.add('bounce'), 600);
-        }, p.delay * 1000);
-    });
+            overlay.classList.remove('active');
+            container.innerHTML = '';
+        }, 800);
+    }, duration + 3000);
+}
 
-    // Fire confetti at the very end
-    setTimeout(() => {
-        fireConfetti();
-        celebText.style.opacity = '1';
-    }, (BURGER_PARTS[BURGER_PARTS.length - 1].delay + 1) * 1000);
+function createFallingSnack(container, snacks) {
+    const snack = document.createElement('div');
+    snack.className = 'falling-snack';
+    snack.textContent = snacks[Math.floor(Math.random() * snacks.length)];
+    snack.style.left = Math.random() * 100 + '%';
+    snack.style.setProperty('--fall-speed', (1.5 + Math.random() * 2) + 's');
+    snack.style.fontSize = (60 + Math.random() * 100) + 'px';
+    container.appendChild(snack);
 
-    // Auto-close after everything
-    setTimeout(() => {
-        overlay.classList.remove('active');
-    }, 15000);
+    setTimeout(() => snack.remove(), 4000);
 }
 
 function fireConfetti() {
@@ -235,7 +235,7 @@ function performSave() {
 
     if (hasChanges) {
         saveWeekData(currentWeekOffset, weekData);
-        showBurgerAnimation();
+        showSnackRain();
     }
 
     pendingChanges = {};
