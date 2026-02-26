@@ -26,69 +26,83 @@
     <div id="floatingDecos"></div>
 
     <div class="container" id="mainApp">
-        <!-- Export button -->
-        <button class="export-btn" id="exportBtn" title="Export CSV">
-            <span class="export-icon">📊</span>
-        </button>
 
-        <!-- Header -->
-        <header class="header">
-            <div class="theme-banner" id="themeBanner">🌈 ✨ 🌈 ✨ 🌈</div>
-            <h1 class="header-title">Lora's Tracker</h1>
-            <p class="header-subtitle">✨ Every step counts! ✨</p>
+        <!-- Left Column: Tracker (65%) -->
+        <div class="main-column">
+            <h1 class="header-title" style="text-align: left; margin-bottom: 20px;">Lora's Tracker</h1>
+            <p class="header-subtitle" style="text-align: left; margin-bottom: 30px; font-size: 1.5rem; color: #555;">✨
+                Every step counts! ✨</p>
 
-            <!-- Total Score -->
-            <div class="score-card">
-                <span class="score-label">Total<br>Score</span>
-                <span class="score-value" id="totalScore">0</span>
+            <!-- Week Navigation -->
+            <nav class="week-nav" style="justify-content: flex-start; margin-bottom: 20px;">
+                <button id="prevWeek" class="nav-btn">◀</button>
+                <span class="week-label" id="weekLabel" style="font-size: 1.8rem;">Loading...</span>
+                <button id="nextWeek" class="nav-btn">▶</button>
+            </nav>
+
+            <!-- Tracker Table -->
+            <div class="tracker-card">
+                <table class="tracker-table">
+                    <thead>
+                        <tr id="headerRow">
+                            <th class="item-header">📋 Items</th>
+                            <th class="day-header"><span class="day-name">Sun</span><br><span class="day-date"></span>
+                            </th>
+                            <th class="day-header"><span class="day-name">Mon</span><br><span class="day-date"></span>
+                            </th>
+                            <th class="day-header"><span class="day-name">Tue</span><br><span class="day-date"></span>
+                            </th>
+                            <th class="day-header"><span class="day-name">Wed</span><br><span class="day-date"></span>
+                            </th>
+                            <th class="day-header"><span class="day-name">Thu</span><br><span class="day-date"></span>
+                            </th>
+                            <th class="day-header"><span class="day-name">Fri</span><br><span class="day-date"></span>
+                            </th>
+                            <th class="day-header"><span class="day-name">Sat</span><br><span class="day-date"></span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="trackerBody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="footer" style="text-align: left; margin-top: 20px;">Made with ❤️ for Lora</div>
+        </div>
+
+        <!-- Right Column: Info & Action (35%) -->
+        <div class="info-column">
+            <div class="theme-banner-box">
+                <div class="theme-banner" id="themeBanner" style="font-size: 2rem;">🌈 ✨ 🌈 ✨ 🌈</div>
             </div>
 
-            <!-- Goal Progress -->
-            <div class="goal-section">
-                <span class="goal-label">🍔 Burger Quest: <span id="burgerCount">0</span>/50</span>
-                <div class="goal-bar-bg">
-                    <div class="goal-bar-fill" id="goalFill" style="width: 0%"></div>
+            <!-- Total Score Panel -->
+            <div class="score-panel">
+                <div class="score-card-big">
+                    <span class="score-label-big">Total Score</span>
+                    <span class="score-value-big" id="totalScore">0</span>
+                </div>
+
+                <!-- Goal Progress -->
+                <div class="goal-section-big">
+                    <span class="goal-label" style="display:block; margin-bottom: 10px; font-size: 1.5rem;">
+                        🍔 Burger Quest <span id="burgerCount">0</span>/50
+                    </span>
+                    <div class="goal-bar-bg" style="height: 30px; border-radius: 15px;">
+                        <div class="goal-bar-fill" id="goalFill" style="width: 0%; border-radius: 15px;"></div>
+                    </div>
                 </div>
             </div>
-        </header>
 
-        <!-- Week Navigation -->
-        <nav class="week-nav">
-            <button id="prevWeek" class="nav-btn">◀</button>
-            <span class="week-label" id="weekLabel">Loading...</span>
-            <button id="nextWeek" class="nav-btn">▶</button>
-        </nav>
-
-        <!-- Tracker Table -->
-        <div class="tracker-card">
-            <table class="tracker-table">
-                <thead>
-                    <tr id="headerRow">
-                        <th class="item-header">📋 Items</th>
-                        <th class="day-header"><span class="day-name">Sun</span><span class="day-date"></span></th>
-                        <th class="day-header"><span class="day-name">Mon</span><span class="day-date"></span></th>
-                        <th class="day-header"><span class="day-name">Tue</span><span class="day-date"></span></th>
-                        <th class="day-header"><span class="day-name">Wed</span><span class="day-date"></span></th>
-                        <th class="day-header"><span class="day-name">Thu</span><span class="day-date"></span></th>
-                        <th class="day-header"><span class="day-name">Fri</span><span class="day-date"></span></th>
-                        <th class="day-header"><span class="day-name">Sat</span><span class="day-date"></span></th>
-                    </tr>
-                </thead>
-                <tbody id="trackerBody">
-                </tbody>
-            </table>
+            <!-- Confirm Area -->
+            <div class="action-panel">
+                <p class="confirm-hint" id="confirmHint" style="font-size: 1.5rem; margin-bottom: 15px;">Ready for
+                    snacks? 🍭</p>
+                <button class="confirm-btn-massive" id="confirmBtn">
+                    ✅ SAVE
+                </button>
+            </div>
         </div>
 
-        <!-- Confirm Button -->
-        <div class="confirm-section">
-            <button class="confirm-btn" id="confirmBtn">
-                <span class="confirm-btn-icon">✅</span>
-                <span class="confirm-btn-text">Confirm & Save</span>
-            </button>
-            <p class="confirm-hint" id="confirmHint">Check items, then press save! 🍔</p>
-        </div>
-
-        <div class="footer">Made with ❤️ for Lora</div>
     </div>
 
     <!-- Snack Rain Overlay -->
