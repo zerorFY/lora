@@ -79,7 +79,11 @@ function calcTotalScore() {
         if (stored) {
             const weekData = JSON.parse(stored);
             for (let d = 0; d < 7; d++) {
-                Object.values(weekData[d]).forEach(val => { if (val) total++; });
+                // Must complete all active items in a single day to get 1 point
+                const allDone = ITEMS.every(item => weekData[d][item.id] === true);
+                if (allDone) {
+                    total++;
+                }
             }
         }
     }
