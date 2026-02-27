@@ -11,31 +11,26 @@
     --secondary: #FF69B4;
     --accent: #FFFFFF;
     --bg-color: #FFF0F5;
-    /* Huge bow SVG pattern */
-    --bg-pattern: url('data:image/svg+xml;utf8,<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg"><path d="M50 80 Q10 20 50 10 Q90 20 100 50 Q110 20 150 10 Q190 20 150 80 Q110 110 100 90 Q90 110 50 80 Z" fill="%23FFE4E1" opacity="0.6"/></svg>');
-    --bg-size: 150px 150px;
+    --bg-pattern: radial-gradient(#FFB7C5 2px, transparent 2px);
+    --bg-size: 30px 30px;
     --text: #C71585;
-    --card-bg: rgba(255, 255, 255, 0.92);
+    --card-bg: rgba(255, 255, 255, 0.95);
     --header-grad: linear-gradient(135deg, #FFB7C5, #FF69B4);
-    --border: 5px solid #FF69B4;
-    --shadow-color: rgba(255, 105, 180, 0.3);
+    --border: 4px solid #FF69B4;
 }
 
 /* --- THEME: KUROMI (Edgy & Dark Purple) --- */
 [data-theme="kuromi"] {
     --primary: #9B59B6;
-    --secondary: #1A0B2E;
+    --secondary: #2C3E50;
     --accent: #E91E63;
-    --bg-color: #2C003E;
-    /* Checkerboard illusion */
-    --bg-pattern: linear-gradient(45deg, #1f0130 25%, transparent 25%, transparent 75%, #1f0130 75%, #1f0130), linear-gradient(45deg, #1f0130 25%, transparent 25%, transparent 75%, #1f0130 75%, #1f0130);
-    background-position: 0 0, 40px 40px;
-    --bg-size: 80px 80px;
+    --bg-color: #1A0B2E;
+    --bg-pattern: repeating-linear-gradient(45deg, #2C3E50 0, #2C3E50 10px, #1A0B2E 10px, #1A0B2E 20px);
+    --bg-size: auto;
     --text: #E0B0FF;
-    --card-bg: rgba(20, 0, 30, 0.85);
+    --card-bg: rgba(44, 62, 80, 0.9);
     --header-grad: linear-gradient(135deg, #9B59B6, #000000);
-    --border: 5px solid #9B59B6;
-    --shadow-color: rgba(155, 89, 182, 0.5);
+    --border: 4px solid #9B59B6;
 }
 
 /* --- THEME: SPIDER MAN (Heroic Red & Blue) --- */
@@ -43,16 +38,13 @@
     --primary: #E61E26;
     --secondary: #315FB0;
     --accent: #FFFFFF;
-    --bg-color: #0d1626;
-    /* Giant Spider Web Pattern */
-    --bg-pattern: repeating-radial-gradient(circle at center, transparent, transparent 40px, rgba(255, 255, 255, 0.05) 40px, rgba(255, 255, 255, 0.05) 42px), repeating-conic-gradient(from 0deg, transparent 0deg, transparent 15deg, rgba(255, 255, 255, 0.05) 15deg, rgba(255, 255, 255, 0.05) 16deg);
-    --bg-size: 100% 100%;
-    background-position: center;
+    --bg-color: #0A0A0A;
+    --bg-pattern: radial-gradient(circle at 50% 50%, transparent 20%, #111 20%, #111 100%), linear-gradient(to right, #333 1px, transparent 1px), linear-gradient(to bottom, #333 1px, transparent 1px);
+    --bg-size: 100px 100px, 20px 20px, 20px 20px;
     --text: #FFFFFF;
-    --card-bg: rgba(15, 20, 35, 0.9);
-    --header-grad: linear-gradient(135deg, #E61E26, #315FB0);
-    --border: 5px solid #E61E26;
-    --shadow-color: rgba(230, 30, 38, 0.4);
+    --card-bg: rgba(230, 30, 38, 0.2);
+    --header-grad: linear-gradient(135deg, #E61E26, #000);
+    --border: 4px solid #E61E26;
 }
 
 /* --- THEME: DEMON HUNTER (Grim & Lethal) --- */
@@ -60,15 +52,13 @@
     --primary: #4A0404;
     --secondary: #FF0000;
     --accent: #F1C40F;
-    --bg-color: #110000;
-    /* Slashing sword marks */
-    --bg-pattern: repeating-linear-gradient(-45deg, rgba(255, 0, 0, 0.03) 0, rgba(255, 0, 0, 0.03) 2px, transparent 2px, transparent 40px), radial-gradient(circle at bottom right, rgba(255, 0, 0, 0.2), transparent 50%);
-    --bg-size: 100% 100%;
+    --bg-color: #000000;
+    --bg-pattern: linear-gradient(45deg, #111 25%, transparent 25%), linear-gradient(-45deg, #111 25%, transparent 25%);
+    --bg-size: 60px 60px;
     --text: #FF6666;
-    --card-bg: rgba(20, 0, 0, 0.9);
-    --header-grad: linear-gradient(135deg, #7A0000, #000);
-    --border: 5px solid #F1C40F;
-    --shadow-color: rgba(255, 0, 0, 0.5);
+    --card-bg: rgba(0, 0, 0, 0.85);
+    --header-grad: linear-gradient(135deg, #4A0404, #900);
+    --border: 4px solid #F1C40F;
 }
 
 /* --- THEME: LABUBU (Wild & Forest) --- */
@@ -76,15 +66,13 @@
     --primary: #2ECC71;
     --secondary: #8E44AD;
     --accent: #F39C12;
-    --bg-color: #0b2e13;
-    /* Monstera Leaf like blobs */
-    --bg-pattern: url('data:image/svg+xml;utf8,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><path d="M50 0 C70 0 100 30 100 60 C100 80 80 100 50 100 C20 100 0 80 0 60 C0 30 30 0 50 0 Z" fill="%23145a32" opacity="0.4"/></svg>');
-    --bg-size: 120px 120px;
-    --text: #F4F9F4;
-    --card-bg: rgba(15, 40, 20, 0.85);
-    --header-grad: linear-gradient(135deg, #2ECC71, #145A32);
-    --border: 5px solid #8E44AD;
-    --shadow-color: rgba(46, 204, 113, 0.3);
+    --bg-color: #F4F9F4;
+    --bg-pattern: radial-gradient(#2ECC71 10%, transparent 10%);
+    --bg-size: 50px 50px;
+    --text: #145A32;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --header-grad: linear-gradient(135deg, #2ECC71, #8E44AD);
+    --border: 4px solid #8E44AD;
 }
 
 * {
@@ -151,164 +139,74 @@ body {
     box-shadow: 0 0 25px var(--secondary);
 }
 
-/* --- LANDSCAPE GRID LAYOUT --- */
+/* Container */
 .container {
-    width: 95vw;
-    max-width: 1400px;
+    width: 100%;
+    max-width: 900px;
     background: var(--card-bg);
     border: var(--border);
     border-radius: 40px;
     padding: 40px;
-    box-shadow: 0 20px 60px var(--shadow-color);
-    backdrop-filter: blur(10px);
-
-    /* Grid Two-Column Magic */
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 50px;
-    margin-left: 100px;
-    /* offset for sidebar */
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
+    position: relative;
+    border-style: dashed;
 }
 
-/* MAIN COLUMN */
-.main-column {
-    display: flex;
-    flex-direction: column;
-}
-
-/* INFO COLUMN */
-.info-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    background: rgba(0, 0, 0, 0.05);
-    padding: 30px;
-    border-radius: 30px;
-    border: 3px dashed var(--secondary);
-}
-
-.theme-banner-box {
-    width: 100%;
+/* Header */
+.header {
     text-align: center;
+    margin-bottom: 40px;
+}
+
+.header-title {
+    font-size: 4rem;
+    font-weight: 800;
     background: var(--header-grad);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(2px 2px 0px var(--accent));
+    margin-bottom: 10px;
 }
 
-.score-panel {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+.score-card {
+    background: var(--bg-color);
+    border: 3px solid var(--secondary);
+    padding: 20px 40px;
+    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
     gap: 20px;
 }
 
-.score-card-big {
-    background: transparent;
-    border: 5px solid var(--secondary);
-    padding: 30px;
-    border-radius: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-.score-label-big {
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--text);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.score-value-big {
-    font-size: 7rem;
+.score-value {
+    font-size: 4rem;
     font-weight: 800;
     color: var(--secondary);
-    line-height: 1;
-    text-shadow: 3px 3px 0 var(--accent);
 }
 
-.action-panel {
-    width: 100%;
-    text-align: center;
-    margin-top: auto;
-}
-
-.confirm-btn-massive {
-    width: 100%;
-    height: 120px;
-    background: var(--header-grad);
-    border: none;
-    border-radius: 60px;
-    color: white;
-    font-size: 3.5rem;
-    font-weight: 800;
-    cursor: pointer;
-    box-shadow: 0 15px 35px var(--shadow-color);
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.confirm-btn-massive:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 25px 50px var(--shadow-color);
-}
-
-.confirm-btn-massive:active {
-    transform: scale(0.95);
-}
-
-/* Goal Bar adjustments */
-.goal-bar-bg {
-    background: rgba(0, 0, 0, 0.1);
-    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-}
-
-.goal-bar-fill {
-    background: var(--header-grad);
-    height: 100%;
-    transition: width 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* Tracker adjustments for landscape */
+/* Tracker Table */
 .tracker-card {
-    width: 100%;
-    margin-top: 10px;
+    overflow-x: auto;
+    margin-bottom: 40px;
 }
 
 .tracker-table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 20px;
+    border-spacing: 0 15px;
 }
 
 .item-name {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 800;
-    padding-right: 20px;
-    white-space: nowrap;
-}
-
-/* Day header layout */
-.day-header {
-    text-align: center;
-    font-size: 1.4rem;
-    line-height: 1.2;
-    color: var(--text);
-    opacity: 0.8;
+    padding: 20px;
 }
 
 .checkbox-wrapper {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     display: block;
     margin: 0 auto;
 }
@@ -321,9 +219,9 @@ body {
     display: block;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.2);
+    background: #EEE;
     border-radius: 20px;
-    border: 4px solid var(--secondary);
+    border: 4px solid transparent;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
 }
@@ -331,11 +229,11 @@ body {
 input:checked+.checkmark {
     background: var(--secondary);
     border-color: var(--accent);
-    transform: scale(1.15) rotate(10deg);
+    transform: scale(1.1) rotate(5deg);
 }
 
 input:checked+.checkmark::after {
-    content: "🌟";
+    content: "✔️";
     display: flex;
     justify-content: center;
     align-items: center;
@@ -343,6 +241,33 @@ input:checked+.checkmark::after {
     font-size: 40px;
 }
 
+/* Confirm Button */
+.confirm-btn {
+    width: 100%;
+    height: 100px;
+    background: var(--header-grad);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.confirm-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.confirm-btn:active {
+    transform: scale(0.95);
+}
 
 /* Snack Rain Overlay */
 .snack-rain-overlay {
@@ -442,30 +367,23 @@ input:checked+.checkmark::after {
     }
 }
 
-@media (max-width: 1100px) {
-    .container {
-        grid-template-columns: 1fr;
-        width: 90vw;
-        margin-left: 80px;
+@media (max-width: 600px) {
+    .header-title {
+        font-size: 2.5rem;
     }
 
-    .score-panel {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+    .item-name {
+        font-size: 1.2rem;
     }
 
-    .score-card-big {
-        padding: 15px 30px;
+    .checkbox-wrapper {
+        width: 50px;
+        height: 50px;
     }
 
-    .score-value-big {
-        font-size: 4rem;
-    }
-
-    .confirm-btn-massive {
-        height: 80px;
-        font-size: 2rem;
+    .confirm-btn {
+        font-size: 1.5rem;
+        height: 70px;
     }
 }
 

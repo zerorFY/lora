@@ -53,7 +53,7 @@ function setTheme(themeId) {
 function getWeekKey(offset) {
     const d = new Date(START_DATE);
     d.setDate(d.getDate() + offset * 7);
-    return `lora_v4_week_${d.toISOString().split('T')[0]}`;
+    return `lora_week_${d.toISOString().split('T')[0]}`;
 }
 
 function loadWeekData(offset) {
