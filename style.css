@@ -100,14 +100,12 @@ body {
     background-image: var(--bg-pattern);
     background-size: var(--bg-size);
     color: var(--text);
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
     transition: background-color var(--theme-speed), background-image var(--theme-speed), color var(--theme-speed);
-    padding: 10px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 /* Theme Sidebar - Fixed to Left */
@@ -118,22 +116,22 @@ body {
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
     background: var(--card-bg);
-    padding: 15px;
-    border-radius: 40px;
+    padding: 20px;
+    border-radius: 50px;
     border: var(--border);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     z-index: 1000;
 }
 
 .theme-option {
-    width: 65px;
-    height: 65px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     border: 4px solid transparent;
     background: white;
-    font-size: 35px;
+    font-size: 45px;
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -157,22 +155,19 @@ body {
 .container {
     width: 95vw;
     max-width: 1400px;
-    height: 90vh;
-    /* Lock height to force internal fitting */
     background: var(--card-bg);
     border: var(--border);
     border-radius: 40px;
-    padding: 25px 40px;
+    padding: 40px;
     box-shadow: 0 20px 60px var(--shadow-color);
     backdrop-filter: blur(10px);
 
     /* Grid Two-Column Magic */
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 40px;
-    margin-left: 90px;
+    gap: 50px;
+    margin-left: 100px;
     /* offset for sidebar */
-    overflow: hidden;
 }
 
 /* MAIN COLUMN */
@@ -185,14 +180,13 @@ body {
 .info-column {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 30px;
     background: rgba(0, 0, 0, 0.05);
-    padding: 20px;
+    padding: 30px;
     border-radius: 30px;
     border: 3px dashed var(--secondary);
-    height: 100%;
 }
 
 .theme-banner-box {
@@ -215,8 +209,8 @@ body {
 .score-card-big {
     background: transparent;
     border: 5px solid var(--secondary);
-    padding: 15px 30px;
-    border-radius: 30px;
+    padding: 30px;
+    border-radius: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -225,7 +219,7 @@ body {
 }
 
 .score-label-big {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 800;
     color: var(--text);
     text-transform: uppercase;
@@ -233,7 +227,7 @@ body {
 }
 
 .score-value-big {
-    font-size: 5rem;
+    font-size: 7rem;
     font-weight: 800;
     color: var(--secondary);
     line-height: 1;
@@ -243,19 +237,20 @@ body {
 .action-panel {
     width: 100%;
     text-align: center;
+    margin-top: auto;
 }
 
 .confirm-btn-massive {
     width: 100%;
-    height: 85px;
+    height: 120px;
     background: var(--header-grad);
     border: none;
-    border-radius: 45px;
+    border-radius: 60px;
     color: white;
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     font-weight: 800;
     cursor: pointer;
-    box-shadow: 0 10px 25px var(--shadow-color);
+    box-shadow: 0 15px 35px var(--shadow-color);
     transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -286,38 +281,34 @@ body {
 /* Tracker adjustments for landscape */
 .tracker-card {
     width: 100%;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    margin-top: 10px;
 }
 
 .tracker-table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 10px;
-    /* Compress vertical gap */
+    border-spacing: 0 20px;
 }
 
 .item-name {
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-weight: 800;
-    padding-right: 15px;
+    padding-right: 20px;
     white-space: nowrap;
 }
 
 /* Day header layout */
 .day-header {
     text-align: center;
-    font-size: 1.2rem;
-    line-height: 1.1;
+    font-size: 1.4rem;
+    line-height: 1.2;
     color: var(--text);
     opacity: 0.8;
 }
 
 .checkbox-wrapper {
-    width: 55px;
-    height: 55px;
+    width: 70px;
+    height: 70px;
     display: block;
     margin: 0 auto;
 }
@@ -349,20 +340,7 @@ input:checked+.checkmark::after {
     justify-content: center;
     align-items: center;
     height: 100%;
-    font-size: 30px;
-}
-
-.nav-btn {
-    background: var(--secondary);
-    color: var(--bg-color);
-    border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    font-size: 16px;
-    cursor: pointer;
-    margin: 0 10px;
-    transition: 0.2s;
+    font-size: 40px;
 }
 
 
