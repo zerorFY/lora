@@ -490,3 +490,127 @@ input:checked+.checkmark::after {
         font-size: 2rem;
     }
 }
+
+/* --- MOBILE (iPhone) RESPONSIVE LAYOUT --- */
+@media (max-width: 768px) {
+    body {
+        height: auto;
+        min-height: 100vh;
+        overflow: auto;
+        padding-bottom: 100px;
+        /* Space for bottom theme bar */
+    }
+
+    /* Move Sidebar to Bottom Horizontal */
+    .theme-sidebar {
+        top: auto;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: row;
+        width: 95vw;
+        justify-content: space-evenly;
+        padding: 10px;
+        gap: 5px;
+        border-radius: 25px;
+        z-index: 10000;
+        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .theme-option {
+        width: 45px;
+        height: 45px;
+        font-size: 24px;
+        border-width: 2px;
+    }
+
+    /* Undo landscape Grid */
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 95vw;
+        height: auto;
+        margin-left: 0;
+        padding: 20px 15px;
+        border-radius: 25px;
+        gap: 25px;
+        overflow: visible;
+    }
+
+    .main-column {
+        align-items: center;
+    }
+
+    .header-title {
+        font-size: 2.5rem;
+        text-align: center !important;
+    }
+
+    .header-subtitle {
+        text-align: center !important;
+        font-size: 1.1rem !important;
+    }
+
+    .week-nav {
+        justify-content: center !important;
+        margin-bottom: 10px !important;
+    }
+
+    /* Side-scrollable table for tiny screens */
+    .tracker-card {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 15px;
+        box-shadow: inset -20px 0 20px -20px rgba(0, 0, 0, 0.2), inset 20px 0 20px -20px rgba(0, 0, 0, 0.2);
+    }
+
+    .tracker-table {
+        min-width: 600px;
+        /* Force minimum width to avoid squishing checkboxes too much */
+        border-spacing: 0 10px;
+    }
+
+    .item-name {
+        font-size: 1.4rem;
+        padding-right: 10px;
+    }
+
+    .day-header {
+        font-size: 1rem;
+    }
+
+    .checkbox-wrapper {
+        width: 45px;
+        height: 45px;
+    }
+
+    input:checked+.checkmark::after {
+        font-size: 24px;
+    }
+
+    /* Info Column & Score Panel */
+    .info-column {
+        padding: 15px;
+        gap: 20px;
+    }
+
+    .score-panel {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .score-card-big {
+        padding: 15px;
+    }
+
+    .score-value-big {
+        font-size: 4rem;
+    }
+
+    .confirm-btn-massive {
+        height: 70px;
+        font-size: 2rem;
+        border-radius: 35px;
+    }
+}
