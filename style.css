@@ -89,11 +89,14 @@ body {
     background-size: var(--bg-size);
     color: var(--text);
     min-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
     transition: background-color var(--theme-speed), background-image var(--theme-speed), color var(--theme-speed);
-    padding: 20px;
+    padding: 20px 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 /* Theme Sidebar - Fixed to Left */
@@ -139,74 +142,178 @@ body {
     box-shadow: 0 0 25px var(--secondary);
 }
 
-/* Container */
+/* --- LANDSCAPE GRID LAYOUT (PC > 1100px) --- */
 .container {
-    width: 100%;
-    max-width: 900px;
+    width: 95vw;
+    max-width: none;
+    /* 解除最大宽度限制，横向铺满 */
+    min-height: 85vh;
     background: var(--card-bg);
     border: var(--border);
     border-radius: 40px;
-    padding: 40px;
+    padding: 30px 50px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(15px);
     position: relative;
     border-style: dashed;
+
+    /* Grid Two-Column Magic */
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 50px;
+    margin-left: 90px;
 }
 
-/* Header */
-.header {
+/* MAIN COLUMN */
+.main-column {
+    display: flex;
+    flex-direction: column;
+}
+
+/* INFO COLUMN */
+.info-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    border-radius: 30px;
+    border: 3px dashed var(--secondary);
+    min-height: 500px;
+}
+
+.theme-banner-box {
+    width: 100%;
     text-align: center;
-    margin-bottom: 40px;
-}
-
-.header-title {
-    font-size: 4rem;
-    font-weight: 800;
     background: var(--header-grad);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(2px 2px 0px var(--accent));
-    margin-bottom: 10px;
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
 }
 
-.score-card {
-    background: var(--bg-color);
-    border: 3px solid var(--secondary);
-    padding: 20px 40px;
-    border-radius: 30px;
-    display: inline-flex;
-    align-items: center;
+.score-panel {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
 }
 
-.score-value {
-    font-size: 4rem;
-    font-weight: 800;
-    color: var(--secondary);
+.score-card-big {
+    background: transparent;
+    border: 5px solid var(--secondary);
+    padding: 20px 30px;
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Tracker Table */
+.score-label-big {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.score-value-big {
+    font-size: 6rem;
+    font-weight: 800;
+    color: var(--secondary);
+    line-height: 1;
+    text-shadow: 3px 3px 0 var(--accent);
+}
+
+.action-panel {
+    width: 100%;
+    text-align: center;
+}
+
+.confirm-btn-massive {
+    width: 100%;
+    height: 100px;
+    background: var(--header-grad);
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-size: 3rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.confirm-btn-massive:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.confirm-btn-massive:active {
+    transform: scale(0.95);
+}
+
+/* Goal Bar adjustments */
+.goal-bar-bg {
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    height: 30px;
+    border-radius: 15px;
+}
+
+.goal-bar-fill {
+    background: var(--header-grad);
+    height: 100%;
+    transition: width 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 15px;
+}
+
+.goal-section-big {
+    width: 100%;
+}
+
+/* Tracker adjustments for landscape */
 .tracker-card {
-    overflow-x: auto;
-    margin-bottom: 40px;
+    width: 100%;
+    margin-top: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .tracker-table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 15px;
+    border-spacing: 0 10px;
 }
 
 .item-name {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 800;
-    padding: 20px;
+    padding-right: 15px;
+    white-space: nowrap;
+}
+
+/* Day header layout */
+.day-header {
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 1.1;
+    color: var(--text);
+    opacity: 0.8;
 }
 
 .checkbox-wrapper {
-    width: 80px;
-    height: 80px;
+    width: 55px;
+    height: 55px;
     display: block;
     margin: 0 auto;
 }
@@ -219,9 +326,9 @@ body {
     display: block;
     width: 100%;
     height: 100%;
-    background: #EEE;
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 20px;
-    border: 4px solid transparent;
+    border: 4px solid var(--secondary);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
 }
@@ -229,44 +336,38 @@ body {
 input:checked+.checkmark {
     background: var(--secondary);
     border-color: var(--accent);
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.15) rotate(10deg);
 }
 
 input:checked+.checkmark::after {
-    content: "✔️";
+    content: "🌟";
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-    font-size: 40px;
+    font-size: 30px;
 }
 
-/* Confirm Button */
-.confirm-btn {
-    width: 100%;
-    height: 100px;
-    background: var(--header-grad);
+.nav-btn {
+    background: var(--secondary);
+    color: var(--bg-color);
     border: none;
-    border-radius: 50px;
-    color: white;
-    font-size: 2.5rem;
-    font-weight: 800;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 16px;
     cursor: pointer;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s;
+    margin: 0 10px;
+    transition: 0.2s;
+}
+
+.nav-btn:hover {
+    transform: scale(1.2);
+}
+
+.week-nav {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 20px;
-}
-
-.confirm-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-}
-
-.confirm-btn:active {
-    transform: scale(0.95);
 }
 
 /* Snack Rain Overlay */
@@ -367,137 +468,22 @@ input:checked+.checkmark::after {
     }
 }
 
-@media (max-width: 600px) {
-    .header-title {
-        font-size: 2.5rem;
-    }
-
-    .item-name {
-        font-size: 1.2rem;
-    }
-
-    .checkbox-wrapper {
-        width: 50px;
-        height: 50px;
-    }
-
-    .confirm-btn {
-        font-size: 1.5rem;
-        height: 70px;
-    }
-}
-
-/* --- MOBILE (iPhone) RESPONSIVE LAYOUT --- */
-@media (max-width: 768px) {
-    body {
-        height: auto;
-        min-height: 100vh;
-        overflow: auto;
-        padding-bottom: 100px;
-        /* Space for bottom theme bar */
-    }
-
-    /* Move Sidebar to Bottom Horizontal */
-    .theme-sidebar {
-        top: auto;
-        bottom: 15px;
-        left: 50%;
-        transform: translateX(-50%);
-        flex-direction: row;
-        width: 95vw;
-        justify-content: space-evenly;
-        padding: 10px;
-        gap: 5px;
-        border-radius: 25px;
-        z-index: 10000;
-        box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .theme-option {
-        width: 45px;
-        height: 45px;
-        font-size: 24px;
-        border-width: 2px;
-    }
-
-    /* Undo landscape Grid */
+/* --- TABLET / SMALL LAPTOPS (iPad > 768px && <= 1100px) --- */
+@media (max-width: 1100px) {
     .container {
-        display: flex;
-        flex-direction: column;
-        width: 95vw;
-        height: auto;
-        margin-left: 0;
-        padding: 20px 15px;
-        border-radius: 25px;
-        gap: 25px;
-        overflow: visible;
-    }
-
-    .main-column {
-        align-items: center;
-    }
-
-    .header-title {
-        font-size: 2.5rem;
-        text-align: center !important;
-    }
-
-    .header-subtitle {
-        text-align: center !important;
-        font-size: 1.1rem !important;
-    }
-
-    .week-nav {
-        justify-content: center !important;
-        margin-bottom: 10px !important;
-    }
-
-    /* Side-scrollable table for tiny screens */
-    .tracker-card {
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 15px;
-        box-shadow: inset -20px 0 20px -20px rgba(0, 0, 0, 0.2), inset 20px 0 20px -20px rgba(0, 0, 0, 0.2);
-    }
-
-    .tracker-table {
-        min-width: 600px;
-        /* Force minimum width to avoid squishing checkboxes too much */
-        border-spacing: 0 10px;
-    }
-
-    .item-name {
-        font-size: 1.4rem;
-        padding-right: 10px;
-    }
-
-    .day-header {
-        font-size: 1rem;
-    }
-
-    .checkbox-wrapper {
-        width: 45px;
-        height: 45px;
-    }
-
-    input:checked+.checkmark::after {
-        font-size: 24px;
-    }
-
-    /* Info Column & Score Panel */
-    .info-column {
-        padding: 15px;
-        gap: 20px;
+        grid-template-columns: 1fr;
+        width: 90vw;
+        margin-left: 80px;
     }
 
     .score-panel {
-        flex-direction: column;
-        gap: 15px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .score-card-big {
-        padding: 15px;
+        padding: 15px 30px;
     }
 
     .score-value-big {
@@ -505,8 +491,104 @@ input:checked+.checkmark::after {
     }
 
     .confirm-btn-massive {
-        height: 70px;
+        height: 80px;
         font-size: 2rem;
-        border-radius: 35px;
     }
+}
+
+.theme-option {
+    width: 45px;
+    height: 45px;
+    font-size: 24px;
+    border-width: 2px;
+}
+
+/* Undo landscape Grid */
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 95vw;
+    height: auto;
+    margin-left: 0;
+    padding: 20px 15px;
+    border-radius: 25px;
+    gap: 25px;
+    overflow: visible;
+}
+
+.main-column {
+    align-items: center;
+}
+
+.header-title {
+    font-size: 2.5rem;
+    text-align: center !important;
+}
+
+.header-subtitle {
+    text-align: center !important;
+    font-size: 1.1rem !important;
+}
+
+.week-nav {
+    justify-content: center !important;
+    margin-bottom: 10px !important;
+}
+
+/* Side-scrollable table for tiny screens */
+.tracker-card {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 15px;
+    box-shadow: inset -20px 0 20px -20px rgba(0, 0, 0, 0.2), inset 20px 0 20px -20px rgba(0, 0, 0, 0.2);
+}
+
+.tracker-table {
+    min-width: 600px;
+    /* Force minimum width to avoid squishing checkboxes too much */
+    border-spacing: 0 10px;
+}
+
+.item-name {
+    font-size: 1.4rem;
+    padding-right: 10px;
+}
+
+.day-header {
+    font-size: 1rem;
+}
+
+.checkbox-wrapper {
+    width: 45px;
+    height: 45px;
+}
+
+input:checked+.checkmark::after {
+    font-size: 24px;
+}
+
+/* Info Column & Score Panel */
+.info-column {
+    padding: 15px;
+    gap: 20px;
+}
+
+.score-panel {
+    flex-direction: column;
+    gap: 15px;
+}
+
+.score-card-big {
+    padding: 15px;
+}
+
+.score-value-big {
+    font-size: 6rem;
+}
+
+.confirm-btn-massive {
+    height: 100px;
+    font-size: 3rem;
+}
 }
